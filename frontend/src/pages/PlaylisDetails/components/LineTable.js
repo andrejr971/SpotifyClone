@@ -26,11 +26,11 @@ function LineTable({ data, playlist }) {
       onMouseEnter={handleVisible}
       onMouseLeave={handleVisible}
       onDoubleClick={() => handlePlayer(data.id)}
-      selected={currentSong.id === data.id}
+      selected={currentSong && currentSong.id === data.id}
       playing={currentSong && data.id === currentSong.id}
     >
       <Music>
-        {currentSong.id === data.id ? (
+        {currentSong && currentSong.id === data.id ? (
           <MdPlayArrow />
         ) : visible ? (
           <MdPlayArrow />
@@ -54,7 +54,6 @@ function LineTable({ data, playlist }) {
         <button type="button">
           <MdMoreHoriz />
         </button>
-        <span>6:30</span>
       </Options>
     </Line>
   );

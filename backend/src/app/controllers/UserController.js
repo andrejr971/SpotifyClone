@@ -7,7 +7,10 @@ class UserController {
     const users = await User.findAll({
       attributes: ['id', 'name', 'email', 'path', 'perfil', 'administrator'],
     });
-    return res.json(users);
+
+    const filterUsers = users.filter((user) => user.id !== req.userId);
+
+    return res.json(filterUsers);
   }
 
   async store(req, res) {

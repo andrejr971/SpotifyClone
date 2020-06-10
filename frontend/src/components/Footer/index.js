@@ -2,7 +2,16 @@ import React, { Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Sound from 'react-sound';
 
-import { play, pause, next, previus } from '../../store/modules/player/actions';
+import {
+  play,
+  pause,
+  next,
+  previus,
+  playing,
+  handlePosition,
+  setPosition,
+  setVolume,
+} from '../../store/modules/player/actions';
 
 import Slider from 'rc-slider';
 import {
@@ -13,6 +22,8 @@ import {
   MdSkipPrevious,
   MdShuffle,
   MdRepeat,
+  MdVolumeOff,
+  MdVolumeDown,
 } from 'react-icons/md';
 
 import {
@@ -27,6 +38,17 @@ import {
 
 function Footer() {
   const player = useSelector((state) => state.player);
+  const position = useSelector((state) => msToTime(state.player.position));
+  const duration = useSelector((state) => msToTime(state.player.duration));
+  const positionShown = useSelector((state) =>
+    msToTime(state.player.positionShown)
+  );
+
+  const progress = useSelector(
+    (state) =>
+      (state.player.positionShown || state.player.position) *
+        (1000 / state.player.duration) || 0
+  );
 
   const dispatch = useDispatch();
 
@@ -46,16 +68,41 @@ function Footer() {
     dispatch(previus());
   }
 
+  function msToTime(duration) {
+    if (!duration) return null;
+
+    let seconds = parseInt((duration / 1000) % 60, 10);
+    let minutes = parseInt((duration / (1000 * 60)) % 60, 10);
+
+    seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    return `${minutes}:${seconds}`;
+  }
+
+  function handlePositionFunc(value) {
+    dispatch(handlePosition(value / 1000));
+  }
+
+  function setPositionFunc(value) {
+    dispatch(setPosition(value / 1000));
+  }
+
+  function handleVolume(value) {
+    dispatch(setVolume(value));
+  }
+
   return (
     <Container>
-      {!!player && (
+      {!!player && player.currentSong && (
         <Sound
           url={player.currentSong.song}
           playStatus={player.status}
           onFinishedPlaying={handleNext}
-          // onPlaying={({ position, duration }) =>
-          //   console.tron.log(position, duration)
-          // }
+          onPlaying={({ position, duration }) =>
+            dispatch(playing(position, duration))
+          }
+          position={player.position}
+          volume={player.volume}
         />
       )}
       <Current>
@@ -77,13 +124,6 @@ function Footer() {
           <button type="button">
             <MdShuffle />
           </button>
-          {/* <button
-            type="button"
-            onClick={handlePrev}
-            {...(player.prev ? '' : 'disabled')}
-          >
-            <MdSkipPrevious />
-          </button> */}
           {!!player && player.prev ? (
             <button type="button" onClick={handlePrev}>
               <MdSkipPrevious />
@@ -126,25 +166,35 @@ function Footer() {
         </Controls>
 
         <Time>
-          <span>1:39</span>
+          <span>{positionShown || position}</span>
           <ProgressSlider>
             <Slider
               railStyle={{ background: '#404040', borderRadius: 10 }}
               trackStyle={{ background: '#1ed760' }}
               handleStyle={{ border: 0 }}
-              // value={100}
+              max={1000}
+              onChange={(value) => handlePositionFunc(value)}
+              onAfterChange={(value) => setPositionFunc(value)}
+              value={progress}
             />
           </ProgressSlider>
-          <span>4:39</span>
+          <span>{!!duration && duration}</span>
         </Time>
       </Progress>
       <Volume>
-        <MdVolumeUp />
+        {!!player && player.volume >= 50 ? (
+          <MdVolumeUp />
+        ) : player.volume < 49 && player.volume > 0 ? (
+          <MdVolumeDown />
+        ) : (
+          <MdVolumeOff />
+        )}
         <Slider
           railStyle={{ background: '#404040', borderRadius: 10 }}
           trackStyle={{ background: '#fff' }}
           handleStyle={{ display: 'none' }}
-          value={100}
+          value={player.volume}
+          onChange={(value) => handleVolume(value)}
         />
       </Volume>
     </Container>

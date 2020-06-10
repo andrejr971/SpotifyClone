@@ -47,7 +47,7 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to="/home" className={HandleSidebar(false, '/search')}>
+            <Link to="/search" className={HandleSidebar(false, '/search')}>
               <MdSearch />
               <span>Buscar</span>
             </Link>
@@ -62,7 +62,10 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to="/home" className={HandleSidebar(false, '/dashboard')}>
+            <Link
+              to="/dashboard"
+              className={HandleSidebar(false, '/dashboard')}
+            >
               <MdDashboard />
               <span>Administrador</span>
             </Link>

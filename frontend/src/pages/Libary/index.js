@@ -1,32 +1,69 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import queryString from 'query-string';
+
+import Start from './components/Start';
+import Artists from './components/Artists';
+import Songs from './components/Songs';
 
 import { Container, Content, Nav, DivContent } from './styles';
 
-function Libary() {
+function Libary({ location }) {
+  const local = queryString.parse(location.search);
+
+  function handleClass(value) {
+    if (value === local.p) {
+      return true;
+    }
+
+    return false;
+  }
+
   return (
     <Container>
       <Content>
         <Nav>
           <ul>
             <li>
-              <Link to="/" className="active">
+              <Link
+                to="/your-library?p=playlists"
+                className={
+                  handleClass('playlists') ? 'active' : !local.p ? 'active' : ''
+                }
+              >
                 Playlists
               </Link>
             </li>
             <li>
-              <Link to="/">Artistas</Link>
+              <Link
+                to="/your-library?p=my-artists"
+                className={handleClass('my-artists') ? 'active' : ''}
+              >
+                Artistas
+              </Link>
             </li>
             <li>
-              <Link to="/">Sons Curtidos</Link>
+              <Link
+                to="/your-library?p=my-songs"
+                className={handleClass('my-songs') ? 'active' : ''}
+              >
+                Sons Curtidos
+              </Link>
             </li>
           </ul>
         </Nav>
         <DivContent>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis itaque
-          placeat voluptates error quisquam! Fuga, eius dolore, minima nostrum
-          at aspernatur cupiditate ut id delectus obcaecati adipisci
-          dignissimos, quia facilis!
+          {local ? (
+            local.p === 'my-songs' ? (
+              <Songs />
+            ) : local.p === 'my-artists' ? (
+              <Artists />
+            ) : (
+              <Start />
+            )
+          ) : (
+            <Start />
+          )}
         </DivContent>
       </Content>
     </Container>

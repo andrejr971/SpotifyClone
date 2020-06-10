@@ -35,7 +35,7 @@ function PlaylisDetails({ match }) {
             <div>
               <strong>PLAYLIST</strong>
               <h1>{playlist.title}</h1>
-              <small>Múscas: {playlist.songs.length}</small>
+              <small>Múscas: {playlist.songs && playlist.songs.length}</small>
             </div>
           </>
         )}

@@ -36,8 +36,30 @@ export function previus() {
   };
 }
 
-export function playing() {
+export function playing(position, duration) {
   return {
     type: '@player/SONG_PLAYING',
+    payload: { position, duration },
+  };
+}
+
+export function handlePosition(percent) {
+  return {
+    type: '@player/HANDLE_POSITION',
+    payload: { percent },
+  };
+}
+
+export function setPosition(percent) {
+  return {
+    type: '@player/SET_POSITION',
+    payload: { percent },
+  };
+}
+
+export function setVolume(volume) {
+  return {
+    type: '@player/SET_VOLUME',
+    payload: { volume },
   };
 }

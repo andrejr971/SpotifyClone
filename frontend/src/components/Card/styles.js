@@ -16,26 +16,9 @@ export const Content = styled(Link)`
   text-decoration: none;
 
   img {
-    width: 100%;
-    height: auto;
+    width: 160px;
+    height: 160px;
     box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.2);
-  }
-
-  div {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-
-    strong {
-      color: #fff;
-      font-size: 20px;
-    }
-
-    span {
-      margin-top: 10px;
-      color: #666;
-      font-size: 12px;
-    }
   }
 `;
 
@@ -61,5 +44,33 @@ export const Play = styled.button`
     height: 47px;
     bottom: 19px;
     right: 19px;
+  }
+`;
+
+export const Description = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+
+  strong {
+    color: #fff;
+    font-size: 20px;
+  }
+  a {
+    text-decoration: none;
+    margin-top: 10px;
+    color: #666;
+    font-size: 12px;
+
+    &:hover {
+      text-decoration: underline;
+      color: #fff;
+    }
+  }
+
+  span {
+    margin-top: 10px;
+    color: #666;
+    font-size: 12px;
   }
 `;

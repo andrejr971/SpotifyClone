@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Wrapper = styled.div`
-  height: 100%;
+  height: 100vh;
   background: #121212;
   display: flex;
   align-items: center;

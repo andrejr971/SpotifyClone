@@ -7,6 +7,10 @@ const INITIAL_STATE = {
   playlist: [],
   prev: false,
   next: false,
+  position: null,
+  duration: null,
+  positionShown: null,
+  volume: 100,
 };
 
 export default function player(state = INITIAL_STATE, action) {
@@ -16,6 +20,7 @@ export default function player(state = INITIAL_STATE, action) {
         draft.currentSong = action.payload.song;
         draft.playlist = action.payload.playlist;
         draft.status = Sound.status.PLAYING;
+        draft.position = 0;
 
         const currentIndex = draft.playlist.findIndex(
           (song) => song.id === draft.currentSong.id
@@ -38,7 +43,6 @@ export default function player(state = INITIAL_STATE, action) {
           }
         }
 
-        console.tron.log(draft.next, draft.prev);
         break;
       }
       case '@player/PLAYING': {
@@ -68,6 +72,8 @@ export default function player(state = INITIAL_STATE, action) {
         } else {
           draft.next = false;
         }
+
+        draft.position = 0;
         break;
       }
       case '@player/PREV': {
@@ -87,20 +93,28 @@ export default function player(state = INITIAL_STATE, action) {
           draft.status = Sound.status.PLAYING;
         }
 
+        draft.position = 0;
+
         break;
       }
-      // case '@player/SONG_PLAYING': {
-      //   const currentIndex = draft.playlist.findIndex(
-      //     (song) => song.id === draft.currentSong.id
-      //   );
-      //   const prev = draft.playlist[currentIndex - 1];
-
-      //   if (prev) {
-      //     draft.currentSong = prev;
-      //     draft.status = Sound.status.PLAYING;
-      //   }
-      //   break;
-      // }
+      case '@player/SONG_PLAYING': {
+        draft.position = action.payload.position;
+        draft.duration = action.payload.duration;
+        break;
+      }
+      case '@player/HANDLE_POSITION': {
+        draft.positionShown = draft.duration * action.payload.percent;
+        break;
+      }
+      case '@player/SET_POSITION': {
+        draft.position = draft.duration * action.payload.percent;
+        draft.positionShown = null;
+        break;
+      }
+      case '@player/SET_VOLUME': {
+        draft.volume = action.payload.volume;
+        break;
+      }
       default:
         break;
     }
