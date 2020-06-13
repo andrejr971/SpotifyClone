@@ -24,3 +24,24 @@ export function albumIdSuccess(album) {
     payload: { album },
   };
 }
+
+export function albumNewRequest(data, id) {
+  return {
+    type: '@album/ALBUM_NEW_REQUEST',
+    payload: { data, id },
+  };
+}
+
+export function albumUpdateRequest(data, id) {
+  return {
+    type: '@album/ALBUM_UPDATE_REQUEST',
+    payload: { data, id },
+  };
+}
+
+export function albumUpdateSuccess(data) {
+  return {
+    type: '@album/ALBUM_UPDATE_SUCCESS',
+    payload: { data },
+  };
+}

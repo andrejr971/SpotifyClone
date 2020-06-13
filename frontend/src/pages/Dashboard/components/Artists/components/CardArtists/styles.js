@@ -18,6 +18,7 @@ export const Content = styled(Link)`
   img {
     width: 160px;
     height: 160px;
+    object-fit: cover;
     border-radius: 50%;
     box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.2);
   }

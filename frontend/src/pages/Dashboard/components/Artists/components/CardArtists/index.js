@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { MdEdit } from 'react-icons/md';
 
 import { Container, Play, Content, Description } from './styles';
@@ -19,7 +18,7 @@ function CardArtist({ data }) {
       <Content to={`/artist/edit/${data.id}`}>
         <img
           src={
-            data.thumbnail
+            data.path_thumbnail
               ? data.thumbnail
               : `https://ui-avatars.com/api/?font-size=0.33&format=svg&bold=true&background=040404&color=fff&name=${data.name}`
           }
@@ -28,8 +27,9 @@ function CardArtist({ data }) {
       </Content>
       <Description>
         <strong>{data.name}</strong>
+        <span>Artista</span>
       </Description>
-      <Play type="button" visible={visible} to={`/artist/edit/${data.id}`}>
+      <Play to={`/artist/edit/${data.id}`} visible={visible}>
         <MdEdit />
       </Play>
     </Container>

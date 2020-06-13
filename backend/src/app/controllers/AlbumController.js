@@ -110,7 +110,36 @@ class AlbumController {
       data = { ...data, originalname, path };
     }
 
-    const album = await Album.findByPk(id);
+    const album = await Album.findByPk(id, {
+      attributes: ['id', 'title', 'thumbnail', 'path'],
+      include: [
+        { model: Artist, as: 'artist', attributes: ['id', 'name'] },
+        {
+          model: Song,
+          as: 'songs',
+          attributes: [
+            'id',
+            'title',
+            'path_thumbnail',
+            'path_song',
+            'thumbnail',
+            'song',
+          ],
+          include: [
+            {
+              model: Artist,
+              as: 'artist',
+              attributes: ['id', 'name'],
+            },
+            {
+              model: Album,
+              as: 'album',
+              attributes: ['id', 'title'],
+            },
+          ],
+        },
+      ],
+    });
 
     if (!album) {
       return res.status(404).json({ error: 'Album não encontrado' });
@@ -118,9 +147,7 @@ class AlbumController {
 
     await album.update(data);
 
-    const { thumbnail } = album;
-
-    return res.json({ id, title, thumbnail });
+    return res.json(album);
   }
 }
 

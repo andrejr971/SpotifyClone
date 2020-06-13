@@ -7,7 +7,8 @@ import player from './player/sagas';
 import album from './album/sagas';
 import users from './users/sagas';
 import artists from './artists/sagas';
+import song from './song/sagas';
 
 export default function* rootSaga() {
-  return yield all([auth, user, playlist, player, album, users, artists]);
+  return yield all([auth, user, playlist, player, album, users, artists, song]);
 }

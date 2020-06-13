@@ -109,6 +109,18 @@ class SongController {
 
     return res.json(songUp);
   }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const song = await Song.findOne({
+      where: { id },
+    });
+
+    await song.destroy();
+
+    return res.json({ ok: true });
+  }
 }
 
 export default new SongController();

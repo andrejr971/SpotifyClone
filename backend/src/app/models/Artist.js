@@ -5,6 +5,20 @@ class Artist extends Model {
     super.init(
       {
         name: Sequelize.STRING,
+        path_thumbnail: Sequelize.STRING,
+        path_cover: Sequelize.STRING,
+        thumbnail: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return `http://localhost:3333/thumbnails/${this.path_thumbnail}`;
+          },
+        },
+        cover: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return `http://localhost:3333/thumbnails/${this.path_cover}`;
+          },
+        },
       },
       {
         sequelize,

@@ -25,4 +25,6 @@ routes.put(
   SongController.update
 );
 
+routes.delete('/:id', SongController.delete);
+
 export default routes;

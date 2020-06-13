@@ -12,8 +12,16 @@ export default function albums(state = INITIAL_STATE, action) {
         draft.albums = action.payload.albums;
         break;
       }
+      case '@album/ALBUM_ID_REQUEST': {
+        draft.albumDetails = null;
+        break;
+      }
       case '@album/ALBUM_ID_SUCCESS': {
         draft.albumDetails = action.payload.album;
+        break;
+      }
+      case '@album/ALBUM_UPDATE_SUCCESS': {
+        draft.albumDetails = action.payload.data;
         break;
       }
       default:
