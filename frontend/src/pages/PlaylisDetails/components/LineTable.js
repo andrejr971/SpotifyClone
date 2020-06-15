@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdMusicNote, MdPlayArrow, MdMoreHoriz } from 'react-icons/md';
 
+import { playlistRemoveSongRequest } from '../../../store/modules/playlist/actions';
 import { playerRequest } from '../../../store/modules/player/actions';
 
-import { Line, Music, Details, Options } from './styles';
+import { Line, Music, Details, Options, NavMore } from './styles';
 
-function LineTable({ data, playlist }) {
+function LineTable({ data, playlist, playlist_id }) {
   const [visible, setVisible] = useState(false);
+  const [visibleMore, setVisibleMore] = useState(false);
   const dispatch = useDispatch();
 
   const currentSong = useSelector((state) => state.player.currentSong);
@@ -19,6 +21,15 @@ function LineTable({ data, playlist }) {
 
   function handlePlayer(id) {
     dispatch(playerRequest(id, playlist));
+  }
+
+  function handleVisibleMore() {
+    setVisibleMore(!visibleMore);
+  }
+
+  function handleRemoveSong() {
+    dispatch(playlistRemoveSongRequest(playlist_id, data.id));
+    setVisibleMore(false);
   }
 
   return (
@@ -51,9 +62,16 @@ function LineTable({ data, playlist }) {
         </Details>
       </Music>
       <Options>
-        <button type="button">
+        <button type="button" onClick={handleVisibleMore}>
           <MdMoreHoriz />
         </button>
+        <NavMore visible={visibleMore}>
+          <li>
+            <button type="button" onClick={handleRemoveSong}>
+              Remover Playlista
+            </button>
+          </li>
+        </NavMore>
       </Options>
     </Line>
   );

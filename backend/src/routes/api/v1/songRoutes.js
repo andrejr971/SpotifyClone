@@ -10,7 +10,7 @@ import admMiddleware from '../../../app/middlewares/administrator';
 const routes = new Router();
 const uploadSong = multer(songs);
 
-// routes.get('/:album_id', SongController.index);
+routes.get('/all', SongController.index);
 routes.get('/:id', SongController.show);
 
 routes.use(admMiddleware);

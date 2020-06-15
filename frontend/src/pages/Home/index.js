@@ -22,7 +22,7 @@ function Home() {
 
   return (
     <Container>
-      {playlists && (
+      {playlists && playlists.length > 0 && (
         <Sections>
           <h2>Playlists</h2>
           <List>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdPlayArrow, MdMoreHoriz } from 'react-icons/md';
 
-import LineTable from './components/LineTable';
+import LineTable from '../../components/LineTable';
 
 import { albumIdRequest } from '../../store/modules/album/actions';
 
@@ -33,9 +33,11 @@ function AlbumDetails({ match }) {
             <div>
               <strong>ALBUM</strong>
               <h1>{album.title}</h1>
-              <Link to={`/artist/${album.artist.id}`}>
-                {album.artist && album.artist.name}
-              </Link>
+              {album.artist && (
+                <Link to={`/artist/${album.artist.id}`}>
+                  {album.artist && album.artist.name}
+                </Link>
+              )}
             </div>
           </>
         )}
@@ -49,13 +51,11 @@ function AlbumDetails({ match }) {
             <MdMoreHoriz />
           </More>
         </Controls>
-        {album ? (
+        {album &&
+          album.songs &&
           album.songs.map((song) => (
             <LineTable key={song.id} data={song} playlist={album.songs} />
-          ))
-        ) : (
-          <h2>Vazio</h2>
-        )}
+          ))}
       </Content>
     </Container>
   );

@@ -62,13 +62,13 @@ function LineTable({ data, playlist }) {
           onMouseEnter={handleVisibleFavorite}
           onMouseLeave={handleVisibleFavorite}
         >
-          {!currentSong.like ? (
+          {!data.like ? (
             visibleFavorite ? (
               <MdFavorite />
             ) : (
               <MdFavoriteBorder />
             )
-          ) : currentSong.like.liked ? (
+          ) : data.like.liked ? (
             visibleFavorite ? (
               <MdFavoriteBorder />
             ) : (

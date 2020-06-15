@@ -4,10 +4,15 @@ import Artist from '../models/Artist';
 
 class SongController {
   async index(req, res) {
-    const { album_id } = req.params;
-
     const songs = await Song.findAll({
-      where: { album_id },
+      attributes: [
+        'id',
+        'path_thumbnail',
+        'path_song',
+        'thumbnail',
+        'song',
+        'title',
+      ],
     });
 
     return res.json(songs);

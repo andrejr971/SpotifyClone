@@ -83,6 +83,7 @@ function Edit({ match }) {
           </button>
         </DivContent>
         {album &&
+          album.songs &&
           album.songs.map((song) => (
             <LineTable key={song.id} data={song} playlist={album.songs} />
           ))}

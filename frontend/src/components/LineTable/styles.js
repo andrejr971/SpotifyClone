@@ -69,7 +69,15 @@ export const Options = styled.div`
   display: flex;
   align-items: center;
   padding-right: 5px;
-  position: relative;
+
+  div {
+    margin-right: 10px;
+
+    svg {
+      font-size: 25px;
+      cursor: pointer;
+    }
+  }
 
   button {
     margin-right: 10px;
@@ -86,6 +94,10 @@ export const Options = styled.div`
       }
     }
   }
+`;
+
+export const DivMore = styled.div`
+  position: relative;
 `;
 
 export const NavMore = styled.ul`

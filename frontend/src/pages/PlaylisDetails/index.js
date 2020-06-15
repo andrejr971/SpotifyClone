@@ -1,14 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdPlayArrow, MdMoreHoriz } from 'react-icons/md';
 
 import LineTable from './components/LineTable';
 
-import { playlistIdRequest } from '../../store/modules/playlist/actions';
+import {
+  playlistIdRequest,
+  playlistDeleteRequest,
+} from '../../store/modules/playlist/actions';
 
-import { Container, Content, Play, More, Controls } from './styles';
+import {
+  Container,
+  Content,
+  Play,
+  More,
+  Controls,
+  DivMore,
+  NavMore,
+} from './styles';
 
 function PlaylisDetails({ match }) {
+  const [visible, setVisible] = useState(false);
+
   const { id } = match.params;
 
   const dispatch = useDispatch();
@@ -22,6 +35,14 @@ function PlaylisDetails({ match }) {
 
     loadPlaylist();
   }, [id, dispatch]);
+
+  function handleVisible() {
+    setVisible(!visible);
+  }
+
+  function handleDelete() {
+    dispatch(playlistDeleteRequest(playlist.id));
+  }
 
   return (
     <Container>
@@ -45,17 +66,32 @@ function PlaylisDetails({ match }) {
           <Play type="button">
             <MdPlayArrow />
           </Play>
-          <More>
-            <MdMoreHoriz />
-          </More>
+          <DivMore>
+            <More onClick={handleVisible}>
+              <MdMoreHoriz />
+            </More>
+            <NavMore visible={visible}>
+              <li>
+                <button type="button">Adicionar músicas</button>
+              </li>
+              <li>
+                <button type="button" onClick={handleDelete}>
+                  Delete
+                </button>
+              </li>
+            </NavMore>
+          </DivMore>
         </Controls>
-        {playlist.songs ? (
+        {playlist &&
+          playlist.songs &&
           playlist.songs.map((song) => (
-            <LineTable key={song.id} data={song} playlist={playlist.songs} />
-          ))
-        ) : (
-          <h2>Vazio</h2>
-        )}
+            <LineTable
+              key={song.id}
+              data={song}
+              playlist_id={playlist.id}
+              playlist={playlist.songs}
+            />
+          ))}
       </Content>
     </Container>
   );

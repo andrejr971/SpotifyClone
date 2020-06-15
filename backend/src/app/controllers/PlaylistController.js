@@ -37,9 +37,9 @@ class PlaylistController {
 
     const user_id = req.userId;
 
-    await Playlist.create({ title, description, user_id });
+    const play = await Playlist.create({ title, description, user_id });
 
-    return res.json({ title, description });
+    return res.json({ id: play.id, title, description });
   }
 
   async show(req, res) {

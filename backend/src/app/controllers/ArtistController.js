@@ -73,6 +73,20 @@ class ArtistController {
               {
                 model: Song,
                 as: 'songs',
+                limit: 3,
+
+                include: [
+                  {
+                    model: Artist,
+                    as: 'artist',
+                    attributes: ['id', 'name'],
+                  },
+                  {
+                    model: Album,
+                    as: 'album',
+                    attributes: ['id', 'title'],
+                  },
+                ],
               },
             ],
           },

@@ -24,3 +24,31 @@ export function playlistIdSuccess(playlist) {
     payload: { playlist },
   };
 }
+
+export function playlistNewRequest(data) {
+  return {
+    type: '@playlist/PLAYLIST_NEW_REQUEST',
+    payload: { data },
+  };
+}
+
+export function playlistDeleteRequest(id) {
+  return {
+    type: '@playlist/PLAYLIST_DELETE_REQUEST',
+    payload: { id },
+  };
+}
+
+export function playlistAddSongRequest(playlist, song) {
+  return {
+    type: '@playlist/PLAYLIST_ADD_SONG_REQUEST',
+    payload: { playlist, song },
+  };
+}
+
+export function playlistRemoveSongRequest(playlist, song) {
+  return {
+    type: '@playlist/PLAYLIST_REMOVE_SONG_REQUEST',
+    payload: { playlist, song },
+  };
+}

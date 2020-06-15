@@ -23,4 +23,8 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  input, select, textarea {
+    font-family: 'Roboto', sans-serif;
+  }
 `;

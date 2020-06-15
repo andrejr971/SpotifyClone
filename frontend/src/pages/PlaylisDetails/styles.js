@@ -69,6 +69,43 @@ export const More = styled.button`
   }
 `;
 
+export const DivMore = styled.div`
+  position: relative;
+`;
+
+export const NavMore = styled.ul`
+  position: absolute;
+  list-style: none;
+  top: 30px;
+  left: 80px;
+  width: 200px;
+  background: #282828;
+  border-radius: 4px;
+  display: ${(props) => (props.visible ? 'block' : 'none')};
+
+  li {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    opacity: 0.4;
+
+    button {
+      text-align: left;
+      border: 0;
+      background: none;
+      color: #fff;
+      font-weight: bold;
+      font-size: 15px;
+      width: 100%;
+    }
+
+    &:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.03);
+    }
+  }
+`;
+
 export const Play = styled.button`
   position: absolute;
   width: 60px;

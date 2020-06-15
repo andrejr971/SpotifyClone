@@ -35,10 +35,15 @@ export const Current = styled.div`
       color: #fff;
     }
 
-    small {
+    a {
+      text-decoration: none;
       font-size: 13px;
       color: #666;
       margin-top: 5px;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 `;

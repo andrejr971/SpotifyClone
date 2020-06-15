@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Sound from 'react-sound';
 
 import {
@@ -114,7 +115,9 @@ function Footer() {
             />
             <div>
               <span>{player.currentSong.title}</span>
-              <small>{player.currentSong.artist.name}</small>
+              <Link to={`/artist/${player.currentSong.artist.id}`}>
+                {player.currentSong.artist.name}
+              </Link>
             </div>
           </Fragment>
         )}
