@@ -84,12 +84,18 @@ export const Options = styled.ul`
     padding: 10px;
     opacity: 0.4;
 
-    a {
+    a,
+    button {
       text-decoration: none;
       color: #fff;
       font-weight: bold;
       font-size: 15px;
       width: 100%;
+    }
+
+    button {
+      border: 0;
+      background: none;
     }
 
     &:hover {

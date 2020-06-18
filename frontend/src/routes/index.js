@@ -11,6 +11,7 @@ import Library from '../pages/Libary';
 import PlaylisDetails from '../pages/PlaylisDetails';
 import Artist from '../pages/Artist';
 import AlbumDetails from '../pages/AlbumDetails';
+import Profile from '../pages/Profile';
 
 import Dashboard from '../pages/Dashboard';
 
@@ -25,6 +26,7 @@ export default function Routes() {
       <Route path="/register" component={SignUp} />
 
       <Route path="/home" component={Home} isPrivite />
+      <Route path="/profile" component={Profile} isPrivite />
       <Route path="/your-library" component={Library} isPrivite />
       <Route path="/playlist/:id" component={PlaylisDetails} isPrivite />
 

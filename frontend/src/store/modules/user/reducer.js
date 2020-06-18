@@ -11,6 +11,10 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.profile = action.payload.user;
         break;
       }
+      case '@user/USER_UPDATE_SUCCESS': {
+        draft.profile = action.payload.profile.profile;
+        break;
+      }
       default:
         break;
     }

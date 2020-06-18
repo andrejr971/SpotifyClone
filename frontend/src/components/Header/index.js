@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
@@ -10,6 +10,8 @@ import {
 
 import history from '../../services/history';
 
+import { logout } from '../../store/modules/auth/actions';
+
 import { Container, Profile, GroupButton, Options } from './styles';
 
 function Header({ visible: visibleButton }) {
@@ -17,6 +19,8 @@ function Header({ visible: visibleButton }) {
   const [color, setColor] = useState(false);
 
   const profile = useSelector((state) => state.user.profile);
+
+  const dispatch = useDispatch();
 
   document.addEventListener('scroll', () => {
     var scroll = window.scrollY;
@@ -27,6 +31,10 @@ function Header({ visible: visibleButton }) {
       setColor(true);
     }
   });
+
+  function handleLogout() {
+    dispatch(logout());
+  }
 
   function handleVisible() {
     setVisible(!visible);
@@ -50,9 +58,16 @@ function Header({ visible: visibleButton }) {
           <MdKeyboardArrowRight />
         </button>
       </GroupButton>
-      <Profile>
+      <Profile id="options">
         <button type="button" onClick={handleVisible}>
-          <img src={profile.perfil} alt="foto de perfil" />
+          <img
+            src={
+              profile.path
+                ? profile.perfil
+                : 'https://api.adorable.io/avatars/100/abott@adorable.png'
+            }
+            alt="foto de perfil"
+          />
           <h2>{profile.name} </h2>
           {visible ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
         </button>
@@ -61,7 +76,9 @@ function Header({ visible: visibleButton }) {
             <Link to="/profile">Perfil</Link>
           </li>
           <li>
-            <Link to="/logout">Sair</Link>
+            <button type="button" onClick={handleLogout}>
+              Sair
+            </button>
           </li>
         </Options>
       </Profile>

@@ -25,6 +25,12 @@ export function singUpSuccess() {
   };
 }
 
+export function logout() {
+  return {
+    type: '@auth/SIGN_OUT',
+  };
+}
+
 export function singFailure() {
   return {
     type: '@auth/SIGN_FAILURE',
