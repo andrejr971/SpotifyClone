@@ -10,13 +10,13 @@ class Artist extends Model {
         thumbnail: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `http://localhost:3333/thumbnails/${this.path_thumbnail}`;
+            return `${process.env.APP_URL}/thumbnails/${this.path_thumbnail}`;
           },
         },
         cover: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `http://localhost:3333/thumbnails/${this.path_cover}`;
+            return `${process.env.APP_URL}/thumbnails/${this.path_cover}`;
           },
         },
       },

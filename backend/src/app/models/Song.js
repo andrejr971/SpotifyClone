@@ -11,13 +11,13 @@ class Song extends Model {
         thumbnail: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `http://localhost:3333/thumbnails/${this.path_thumbnail}`;
+            return `${process.env.APP_URL}/thumbnails/${this.path_thumbnail}`;
           },
         },
         song: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `http://localhost:3333/songs/${this.path_song}`;
+            return `${process.env.APP_URL}/songs/${this.path_song}`;
           },
         },
       },

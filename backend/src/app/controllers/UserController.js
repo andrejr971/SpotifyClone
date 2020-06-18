@@ -89,7 +89,7 @@ class UserController {
     try {
       await user.update(data);
 
-      const { id, perfil, name } = user;
+      const { id, perfil, name, path, administrator } = user;
 
       return res.json({
         profile: {
@@ -97,6 +97,8 @@ class UserController {
           name,
           email,
           perfil,
+          path,
+          administrator
         },
       });
     } catch (err) {
