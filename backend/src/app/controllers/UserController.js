@@ -98,7 +98,11 @@ class UserController {
           email,
           perfil,
           path,
+<<<<<<< HEAD
           administrator,
+=======
+          administrator
+>>>>>>> 9865933aa1941f024bfd36cd237dc042b9a85e18
         },
       });
     } catch (err) {
