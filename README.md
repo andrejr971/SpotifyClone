@@ -5,8 +5,10 @@ Utilizando no backend NodeJs e no frontend ReacJs.
 
 Pra instalar as dependências do projeto tanto no backend como frontent , no terminal rodar:
   yarn ou npm install
- 
- E para rodas a aplicação no backend:
+
+Na pasta backend, faça uma cópia do arquivo .env.example e renomeie para .env, neste aquivo fica as vaiavéis ambiente
+
+E para rodas a aplicação no backend:
   yarn dev ou npm run dev
 
 No frontend:
