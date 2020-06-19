@@ -14,7 +14,7 @@ class User extends Model {
         perfil: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `http://localhost:3333/perfil/${this.path}`;
+            return `${process.env.APP_URL}/perfil/${this.path}`;
           },
         },
         administrator: Sequelize.BOOLEAN,
